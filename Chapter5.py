@@ -23,18 +23,18 @@ class CLA:
                 if CLA.questionOne(test) == 50:
                     numberCorrect += 1
                     answer.append([sticks[i], n])
-        print(answer if numberCorrect>0 else "No Answer")
+        print(answer if numberCorrect > 0 else "No Answer")
 
     @staticmethod
     def questionThreeAndFour():
         answers = 0
-        sticks = [] #list of all possible sticks
-        for n in range(1,10):
-            sticks.append(n)
-        combos = set([*perm(sticks, 5)])
+        sticks = list(range(1,10))
+        combos = [sorted(i) for i in [*perm(sticks, 5)] if len(set(i))==len(i)]
+        a=[]
         for bag in combos:
-            if CLA.questionOne(bag) == 0:
+            if sorted(bag) not in a and CLA.questionOne(bag) == 0:
                 answers += 1
+                a.append(sorted(bag))
                 print(*sorted(bag))
         if answers == 0:
             print("No Answer")
